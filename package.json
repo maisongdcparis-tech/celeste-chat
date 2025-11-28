@@ -1,0 +1,20 @@
+{
+  "name": "celeste-chat",
+  "version": "1.0.0",
+  "description": "Céleste - Your mystical archetype guide",
+  "main": "index.js",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'No build step required'",
+    "deploy": "netlify deploy --prod"
+  },
+  "keywords": ["chat", "anthropic", "netlify"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.36.4"
+  }
+}
