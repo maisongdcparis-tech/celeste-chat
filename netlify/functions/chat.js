@@ -139,29 +139,67 @@ Remember: You are not just providing information—you are holding sacred space 
 Begin now, beloved guide. Welcome your next seeker with grace.`;
 
 exports.handler = async (event, context) => {
+  // CORS headers
+  const headers = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS'
+  };
+
+  // Handle OPTIONS request for CORS preflight
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers
+    };
+  }
+
   // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
+      headers,
       body: JSON.stringify({ error: 'Method Not Allowed' })
     };
   }
 
   try {
+    // Check for API key
+    if (!process.env.ANTHROPIC_API_KEY) {
+      console.error('ANTHROPIC_API_KEY environment variable is not set');
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({
+          error: 'Server configuration error',
+          details: 'API key not configured'
+        })
+      };
+    }
+
+    console.log('API Key present:', process.env.ANTHROPIC_API_KEY ? 'Yes' : 'No');
+    console.log('API Key starts with:', process.env.ANTHROPIC_API_KEY?.substring(0, 10));
+
     // Parse the request body
     const { messages } = JSON.parse(event.body);
 
     if (!messages || !Array.isArray(messages)) {
       return {
         statusCode: 400,
+        headers,
         body: JSON.stringify({ error: 'Invalid request: messages array required' })
       };
     }
+
+    console.log('Initializing Anthropic client...');
 
     // Initialize Anthropic client
     const anthropic = new Anthropic({
       apiKey: process.env.ANTHROPIC_API_KEY
     });
+
+    console.log('Calling Anthropic API...');
 
     // Call the Anthropic API
     const response = await anthropic.messages.create({
@@ -171,32 +209,32 @@ exports.handler = async (event, context) => {
       messages: messages
     });
 
+    console.log('API call successful');
+
     // Return the response
     return {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS'
-      },
+      headers,
       body: JSON.stringify({
         response: response.content[0].text
       })
     };
 
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Detailed error:', {
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+      response: error.response?.data
+    });
 
     return {
       statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
+      headers,
       body: JSON.stringify({
         error: 'Failed to process request',
-        details: error.message
+        details: error.message,
+        type: error.name
       })
     };
   }

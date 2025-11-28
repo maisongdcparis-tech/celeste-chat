@@ -1,0 +1,8 @@
+{
+  "name": "celeste-functions",
+  "version": "1.0.0",
+  "description": "Netlify Functions for Céleste chat",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1"
+  }
+}
