@@ -45,7 +45,7 @@ git push -u origin main
    - **Publish directory:** `public`
    - Click "Show advanced" → "New variable"
      - Key: `ANTHROPIC_API_KEY`
-     - Value: `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`
+     - Value: `YOUR_ANTHROPIC_API_KEY_HERE`
 
 4. **Deploy:**
    - Click "Deploy site"

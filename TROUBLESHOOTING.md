@@ -29,14 +29,14 @@ If not, the package.json might not be deployed.
 **Cause:** Environment variable not set
 **Solution:**
 1. Go to: https://app.netlify.com/sites/spiffy-biscuit-a55c9a/configuration/env
-2. Add: `ANTHROPIC_API_KEY` = `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`
+2. Add: `ANTHROPIC_API_KEY` = `YOUR_ANTHROPIC_API_KEY_HERE`
 3. Redeploy
 
 #### Error: "Invalid API key" or 401
 **Cause:** API key is incorrect or malformed
 **Solution:** Double-check the API key matches exactly:
 ```
-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
+YOUR_ANTHROPIC_API_KEY_HERE
 ```
 
 ## Deploy Checklist

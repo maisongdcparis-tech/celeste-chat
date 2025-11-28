@@ -66,7 +66,7 @@ A beautiful, mystical chat interface powered by Claude AI to help seekers discov
 
 4. **Set environment variable:**
    ```bash
-   netlify env:set ANTHROPIC_API_KEY "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"
+   netlify env:set ANTHROPIC_API_KEY "YOUR_ANTHROPIC_API_KEY_HERE"
    ```
 
 5. **Deploy:**
@@ -98,7 +98,7 @@ A beautiful, mystical chat interface powered by Claude AI to help seekers discov
    - Go to Site settings → Environment variables
    - Add variable:
      - Key: `ANTHROPIC_API_KEY`
-     - Value: `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`
+     - Value: `YOUR_ANTHROPIC_API_KEY_HERE`
 
 4. **Deploy:**
    - Click "Deploy site"

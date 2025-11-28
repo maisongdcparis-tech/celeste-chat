@@ -64,7 +64,7 @@ After deploying, double-check your API key is set:
 3. If not, add it:
    - Click "Add a variable"
    - Key: `ANTHROPIC_API_KEY`
-   - Value: `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`
+   - Value: `YOUR_ANTHROPIC_API_KEY_HERE`
    - Scopes: All scopes
    - Click "Create variable"
 

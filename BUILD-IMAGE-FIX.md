@@ -68,7 +68,7 @@ If you still see errors after updating the build image:
 1. **Check environment variable:**
    - Site settings → Environment variables
    - Verify `ANTHROPIC_API_KEY` is set
-   - Value: `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`
+   - Value: `YOUR_ANTHROPIC_API_KEY_HERE`
 
 2. **Check function logs:**
    - Functions tab → Click `chat` function

@@ -46,7 +46,7 @@ You have two options:
    - In Netlify, go to: Site settings → Environment variables
    - Click "Add a variable"
    - Key: `ANTHROPIC_API_KEY`
-   - Value: `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`
+   - Value: `YOUR_ANTHROPIC_API_KEY_HERE`
    - Click "Create variable"
 
 6. **Redeploy (to pick up the environment variable):**
@@ -63,7 +63,7 @@ You have two options:
 3. **Important:** After the site deploys, you need to:
    - Click "Site settings"
    - Go to "Environment variables"
-   - Add: `ANTHROPIC_API_KEY` = `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`
+   - Add: `ANTHROPIC_API_KEY` = `YOUR_ANTHROPIC_API_KEY_HERE`
    - Go to "Deploys" and click "Trigger deploy"
 
 ## Method 2: Deploy via Netlify CLI (Alternative)
@@ -77,7 +77,7 @@ cd /Users/heatherjerue/celeste-chat
 npx netlify link
 
 # Set environment variable
-npx netlify env:set ANTHROPIC_API_KEY "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"
+npx netlify env:set ANTHROPIC_API_KEY "YOUR_ANTHROPIC_API_KEY_HERE"
 
 # Deploy
 npx netlify deploy --prod --dir=public --functions=netlify/functions
@@ -137,7 +137,7 @@ npx netlify deploy --prod --dir=public --functions=netlify/functions
 
 **Your Project Location:** `/Users/heatherjerue/celeste-chat`
 
-**Your API Key:** `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`
+**Your API Key:** `YOUR_ANTHROPIC_API_KEY_HERE`
 
 **Required Environment Variable:**
 - Name: `ANTHROPIC_API_KEY`
