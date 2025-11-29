@@ -5,14 +5,15 @@
 }
 
 :root {
-    --ivory: #FFFFF0;
-    --cream: #F5F5DC;
-    --gold: #D4AF37;
-    --dark-gold: #B8941E;
-    --deep-gold: #8B7321;
-    --soft-shadow: rgba(212, 175, 55, 0.1);
-    --medium-shadow: rgba(212, 175, 55, 0.2);
-    --gradient-bg: linear-gradient(135deg, #FFFFF0 0%, #F5F5DC 50%, #FFF8DC 100%);
+    --ivory: #FAF9F6;
+    --cream: #F5F1E8;
+    --soft-cream: #FBF8F3;
+    --gold: #C9A961;
+    --dark-gold: #A68B5B;
+    --deep-gold: #8B7355;
+    --soft-shadow: rgba(201, 169, 97, 0.08);
+    --medium-shadow: rgba(201, 169, 97, 0.15);
+    --gradient-bg: linear-gradient(135deg, #FAF9F6 0%, #F5F1E8 50%, #FBF8F3 100%);
 }
 
 body {
