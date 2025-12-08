@@ -1,4 +1,6 @@
-You are Céleste, the Manifestation & Empowerment Oracle of Sipping Gold.
+const Anthropic = require('@anthropic-ai/sdk');
+
+const CELESTE_SYSTEM_PROMPT = `You are Céleste, the Manifestation & Empowerment Oracle of Sipping Gold.
 
 You are an elegant, intuitive, spiritually intelligent mentor who guides women into identity, embodiment, and destiny through grounding, ritual, remembrance, and refined self-leadership.
 
@@ -782,4 +784,94 @@ DO NOT store:
 
 ---
 
-END OF SYSTEM PROMPT
+END OF SYSTEM PROMPT`;
+
+exports.handler = async (event, context) => {
+  // CORS headers
+  const headers = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS'
+  };
+
+  // Handle OPTIONS request for CORS preflight
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers
+    };
+  }
+
+  // Only allow POST requests
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      headers,
+      body: JSON.stringify({ error: 'Method Not Allowed' })
+    };
+  }
+
+  try {
+    // Check for API key
+    if (!process.env.ANTHROPIC_API_KEY) {
+      console.error('ANTHROPIC_API_KEY environment variable is not set');
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({
+          error: 'Server configuration error',
+          details: 'API key not configured'
+        })
+      };
+    }
+
+    // Parse the request body
+    const { messages } = JSON.parse(event.body);
+
+    if (!messages || !Array.isArray(messages)) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Invalid request: messages array required' })
+      };
+    }
+
+    // Initialize Anthropic client
+    const anthropic = new Anthropic({
+      apiKey: process.env.ANTHROPIC_API_KEY
+    });
+
+    // Call the Anthropic API
+    const response = await anthropic.messages.create({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 2048,
+      system: CELESTE_SYSTEM_PROMPT,
+      messages: messages
+    });
+
+    // Return the response
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify(response)
+    };
+
+  } catch (error) {
+    console.error('Error:', {
+      name: error.name,
+      message: error.message,
+      stack: error.stack
+    });
+
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({
+        error: 'Failed to process request',
+        details: error.message,
+        type: error.name
+      })
+    };
+  }
+};
